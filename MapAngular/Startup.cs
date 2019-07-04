@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace MapAngular
 {
@@ -25,6 +20,11 @@ namespace MapAngular
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSpaStaticFiles(options =>
+            {
+                options.RootPath = "wwwroot";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +35,16 @@ namespace MapAngular
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSpaStaticFiles();
+
             app.UseMvc();
+
+            app.UseSpa(builder =>
+            {
+                builder.Options.SourcePath = "src";
+
+                builder.UseAngularCliServer("start");
+            });
         }
     }
 }
