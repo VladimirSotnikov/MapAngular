@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-lg-6">
+        <mat-card>
+            <mat-card-title *ngIf="form.value.id; else addTitle">Edit {{place.name}}</mat-card-title>
+            <ng-template #addTitle>
+                <mat-card-title>Add new place</mat-card-title>
+            </ng-template>
+            <mat-card-content>
+                <form id="placeEditForm" fxLayout="column" [formGroup]="form" (ngSubmit)="submit(form)">
+                    <mat-form-field>
+                        <input matInput placeholder="Name" formControlName="name">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Latitude" formControlName="latitude">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Longitude" formControlName="longitude">
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button type="submit" mat-raised-button color="primary" form="placeEditForm">Submit</button>
+                <button type="button" mat-button routerLink="/">Cancel</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
