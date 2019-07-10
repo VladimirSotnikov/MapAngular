@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { PlaceDto } from '../api/place-dto';
-import { PlacesService } from '../api/places.service';
+import { IAppState, getPlaces } from '../store';
+import { loadPlaces, deletePlace } from '../store/place/place.actions';
 
 @Component({
     selector: 'places',
@@ -8,21 +10,13 @@ import { PlacesService } from '../api/places.service';
 })
 export class PlacesComponent {
 
-    places: PlaceDto[] = [];
+    places$ = this.store.pipe(select(getPlaces));
 
-    constructor(private readonly placeService: PlacesService) {
-        this.loadPlaces();
+    constructor(private readonly store: Store<IAppState>) {
+        store.dispatch(loadPlaces());
     }
 
-    private async loadPlaces(): Promise<void> {
-        this.places = await this.placeService.getPlaces().toPromise();
-    }
-
-    async deletePlace(place: PlaceDto): Promise<void> {
-        await this.placeService.deletePlace(place.id).toPromise();
-        const index = this.places.indexOf(place);
-        if (index >= 0) {
-            this.places.splice(index);
-        }
+    deletePlace(place: PlaceDto): void {
+        this.store.dispatch(deletePlace({ place }));
     }
 }

@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
 import { PlaceDto } from '../../api/place-dto';
-import { PlacesService } from '../../api/places.service';
+import { IAppState } from '../../store/index';
+//import { selectPlace, getCount } from '../../store/place/place.selectors';
+import { map } from 'rxjs/operators';
+import { updatePlace, addPlace } from '../../store/place/place.actions';
 
 @Component({
     selector: 'place',
@@ -16,10 +20,9 @@ export class PlaceComponent {
     constructor(
         fb: FormBuilder,
         route: ActivatedRoute,
-        private readonly router: Router,
-        private readonly placeService: PlacesService) {
+        private readonly store: Store<IAppState>) {
 
-        const id = route.snapshot.params['id'] as number;
+        const id = parseInt(route.snapshot.params['id'], 10);
 
         this.form = fb.group({
             id: [0],
@@ -29,21 +32,21 @@ export class PlaceComponent {
         });
 
         if (id) {
-            this.loadPlace(id);
+            //this.store.pipe(select(selectPlace, { id })).subscribe(place => {
+            //    this.place = place;
+            //    this.form.patchValue(this.place);
+            //});
+            //this.store.pipe(select(getCount, { id })).subscribe(data => {
+            //    console.log('data' + JSON.stringify(data));
+            //});
         }
     }
 
-    private async loadPlace(id: number): Promise<void> {
-        this.place = await this.placeService.getPlace(id).toPromise();
-
-        this.form.patchValue(this.place);
-    }
-
-    async submit({ value, valid }: { value: PlaceDto, valid: boolean }): Promise<void> {
+    submit({ value, valid }: { value: PlaceDto, valid: boolean }): void {
         if (!valid) return;
 
-        await (value.id ? this.placeService.updatePlace(value) : this.placeService.addPlace(value)).toPromise();
+        this.store.dispatch(value.id ? updatePlace({ place: value }) : addPlace({place: value}));
 
-        this.router.navigate(['/']);
+        //this.router.navigate(['/']);
     }
 }

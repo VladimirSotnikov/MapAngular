@@ -7,8 +7,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
+import * as fromPlaces from './store/place/place.reducer';
+import { PlaceEffects } from './store/place/place.effects';
 
 @NgModule({
     declarations: [
@@ -18,6 +22,12 @@ import { routes } from './app.routes';
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(routes),
+        StoreModule.forRoot({
+            places: fromPlaces.reducer
+        }),
+        EffectsModule.forRoot([
+            PlaceEffects
+        ]),
         HttpClientModule,
         MatSidenavModule,
         MatToolbarModule,

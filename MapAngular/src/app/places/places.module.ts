@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { PlacesComponent } from './places.component';
 import { PlaceComponent } from './place/place.component';
 import { routes } from './places.routes';
@@ -26,7 +27,8 @@ import { routes } from './places.routes';
         MatButtonModule,
         MatInputModule,
         MatFormFieldModule,
-        MatCardModule
+        MatCardModule,
+        MatTooltipModule
     ]
 })
 export class PlacesModule { }
