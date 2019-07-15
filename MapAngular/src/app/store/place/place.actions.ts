@@ -59,3 +59,12 @@ export const deletePlaceError = createAction(
     '[Place API] Delete Place Error',
     props<{ error?: any }>(),
 );
+
+export const selectPlace = createAction(
+    '[Places Component] Select Place',
+    props<{ id: number }>(),
+);
+
+export const unselectPlace = createAction(
+    '[Places Component] Unselect Place',
+);

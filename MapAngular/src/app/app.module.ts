@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import * as fromPlaces from './store/place/place.reducer';
@@ -23,11 +24,13 @@ import { PlaceEffects } from './store/place/place.effects';
         BrowserAnimationsModule,
         RouterModule.forRoot(routes),
         StoreModule.forRoot({
-            places: fromPlaces.reducer
+            places: fromPlaces.reducer,
+            router: routerReducer
         }),
         EffectsModule.forRoot([
             PlaceEffects
         ]),
+        StoreRouterConnectingModule.forRoot(),
         HttpClientModule,
         MatSidenavModule,
         MatToolbarModule,

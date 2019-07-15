@@ -4,7 +4,7 @@
             <h3 mat-subheader>Places ({{(places$ | async)?.length}})</h3>
             <button mat-raised-button class="mb-2" [routerLink]="['/place']" matTooltip="Create new place">Add Place</button>
     
-            <mat-list-item *ngFor="let place of places$ | async" [routerLink]="['/place', place.id]">
+            <mat-list-item *ngFor="let place of places$ | async" [routerLink]="['/place', place.id]" >
                 <h4 matLine>{{place.name}}</h4>
                 <p matLine>
                     <small>{{place.latitude}}, {{place.longitude}}</small>

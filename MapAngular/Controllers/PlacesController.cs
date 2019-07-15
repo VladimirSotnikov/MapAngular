@@ -47,7 +47,7 @@ namespace MapAngular.Controllers
         }
 
         [HttpPost]
-        public async Task<PlaceDto> AddPlace(PlaceDto dto)
+        public async Task<PlaceDto> AddPlace(PlaceNewDto dto)
         {
             var place = new Place
             {

@@ -1,4 +1,5 @@
 import { PlaceDto } from '../api/place-dto';
+import { RouterReducerState } from '@ngrx/router-store';
 
 export interface IPlaceState {
     ids: number[];
@@ -7,7 +8,8 @@ export interface IPlaceState {
 }
 
 export interface IAppState {
-    places: IPlaceState
+    places: IPlaceState,
+    router: RouterReducerState<any>;
 }
 
 export * from './place/place.selectors';

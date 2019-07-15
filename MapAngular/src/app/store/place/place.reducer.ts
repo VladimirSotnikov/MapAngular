@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { loadPlacesSuccess, addPlaceSuccess, updatePlaceSuccess, deletePlaceSuccess } from './place.actions';
+import { loadPlacesSuccess, addPlaceSuccess, updatePlaceSuccess, deletePlaceSuccess, selectPlace, unselectPlace } from './place.actions';
 import { IPlaceState } from '../index';
 
 export const initialState: IPlaceState = {
@@ -10,11 +10,11 @@ export const initialState: IPlaceState = {
 
 const placeReducer = createReducer(
     initialState,
-    on(loadPlacesSuccess, (_, { places }) => {
+    on(loadPlacesSuccess, (state, { places }) => {
         const newState: IPlaceState = {
+            ...state,
             ids: [],
             places: {},
-            selected: null
         }
         for (const place of places) {
             newState.places[place.id] = place;
@@ -34,7 +34,7 @@ const placeReducer = createReducer(
     on(updatePlaceSuccess, (state, { place }) => {
         const newState: IPlaceState = {
             ...state,
-            ids: [...state.ids, place.id],
+            ids: [...state.ids],
             places: { ...state.places }
         }
         newState.places[place.id] = place;
@@ -43,12 +43,26 @@ const placeReducer = createReducer(
     on(deletePlaceSuccess, (state, { place }) => {
         const newState: IPlaceState = {
             ...state,
-            ids: [...state.ids, place.id],
+            ids: [...state.ids],
             places: { ...state.places }
         }
         delete newState.places[place.id];
-        newState.ids.splice(state.ids.findIndex(e => e === place.id));
+        newState.ids.splice(state.ids.findIndex(e => e === place.id), 1);
         return newState;
+    }),
+    on(selectPlace, (state, { id }) => {
+        return {
+            ids: [...state.ids],
+            places: { ...state.places },
+            selected: id
+        };
+    }),
+    on(unselectPlace, (state) => {
+        return {
+            ids: [...state.ids],
+            places: { ...state.places },
+            selected: null
+        };
     })
 );
 
