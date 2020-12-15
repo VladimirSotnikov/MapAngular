@@ -24,6 +24,7 @@
     "@ngrx/effects": "^10.1.0",
     "@ngrx/router-store": "^10.1.0",
     "@ngrx/store": "^10.1.0",
+    "angular-imask": "^6.0.5",
     "bootstrap": "^4.5.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
