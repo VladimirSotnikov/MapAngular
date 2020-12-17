@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import * as fromPlaces from './store/place/place.reducer';
 import { PlaceEffects } from './store/place/place.effects';
+import { IMaskModule } from 'angular-imask';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PlaceEffects } from './store/place/place.effects';
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    IMaskModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
