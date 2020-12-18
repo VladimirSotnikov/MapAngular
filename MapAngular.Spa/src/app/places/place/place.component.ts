@@ -15,6 +15,24 @@ export class PlaceComponent {
   place: PlaceDto;
   form: FormGroup;
 
+  latitudeMaskOptions = {
+    mask: Number,
+    scale: 7,
+    max: 90,
+    min: -90,
+    signed: true,
+    radix: '.',
+  };
+
+  longitudeMaskOptions = {
+    mask: Number,
+    scale: 7,
+    max: 180,
+    min: -180,
+    signed: true,
+    radix: '.',
+  };
+
   constructor(
     fb: FormBuilder,
     private readonly store: Store<IAppState>

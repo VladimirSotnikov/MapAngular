@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { PlacesComponent } from './places.component';
 import { PlaceComponent } from './place/place.component';
 import { routes } from './places.routes';
+import { IMaskModule } from 'angular-imask';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { routes } from './places.routes';
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    IMaskModule
   ]
 })
 export class PlacesModule { }

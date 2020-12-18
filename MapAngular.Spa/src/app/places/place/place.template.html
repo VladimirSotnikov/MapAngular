@@ -12,11 +12,13 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput placeholder="Latitude" formControlName="latitude">
+            <input type="tel" matInput placeholder="Latitude" formControlName="latitude" [imask]="latitudeMaskOptions"
+              autocomplete="off">
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput placeholder="Longitude" formControlName="longitude">
+            <input type="tel" matInput placeholder="Longitude" formControlName="longitude" [imask]="longitudeMaskOptions"
+              autocomplete="off">
           </mat-form-field>
         </form>
       </mat-card-content>
