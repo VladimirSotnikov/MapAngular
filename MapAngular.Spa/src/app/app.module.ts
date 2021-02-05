@@ -10,10 +10,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
-import { AppComponent } from './app.component';
+
 import { routes } from './app.routes';
 import * as fromPlaces from './store/place/place.reducer';
 import { PlaceEffects } from './store/place/place.effects';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
